@@ -1,0 +1,2 @@
+# Movie_Watchlist
+ his is a JavaScript-based application that allows users to search for movies by title. The app fetches movie data from the OMDB API, including details like poster image, title, runtime, genre, and plot. Users can search for movies and the results are displayed in a visually appealing format. The app also includes features to clear search results and input field. It's a great tool for movie enthusiasts to quickly and easily find information about their favorite movies.
