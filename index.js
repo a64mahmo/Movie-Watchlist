@@ -35,12 +35,8 @@ async function handleSearchID(movieIDList) {
         const res = await fetch(`http://www.omdbapi.com/?apikey=${apikey}&i=${movieID}`);
         const movie = await res.json();
         movieList.push(movie);
-    } if (movieList) {
-            searchResults.innerHTML += '<h1 class="no-results"> No results found </h1>';
-            console.log('No movies found');
-    } else{
-        printMovies(movieList);
     }
+    printMovies(movieList);
 }
 
 function clearSearchResults() {
@@ -81,6 +77,9 @@ function printMovies(movies) {
             </article>
           </div>`;
         });
+    } else {
+        searchResults.innerHTML += '<h1 class="no-results"> No results found </h1>';
+        console.log('No movies found');
     }
 }
 
