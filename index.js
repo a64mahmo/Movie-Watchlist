@@ -61,7 +61,7 @@ function printMovies(movies) {
               <div class="card_info">
                 <div class="card_title">
                   <h1 class="movie_title">${movie.Title}</h1>
-                  <p class="movie_ratings">⭐️ ${movie.Runtime}</p>
+                  <p class="movie_ratings">⭐️ ${movie.Ratings[0].Value}</p>
                 </div>
 
                 <div class="card_action">
