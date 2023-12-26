@@ -4,6 +4,9 @@ let searchInput = document.getElementById('search-input');
 const searchResults = document.getElementById('search-results');
 let emptySearch = document.getElementById('empy_state');
 const apikey = 'bc20f6e3';
+let url = 'https://www.omdbapi.com/?apikey=';
+
+
 
 // Event listener for search input
 searchInput.addEventListener('keyup', function (event) {
@@ -24,7 +27,7 @@ searchInput.addEventListener('keyup', function (event) {
 
 // Function to handle search
 async function handleSearch(searchTerm) {
-    const res = await fetch(`http://www.omdbapi.com/?apikey=${apikey}&s=${searchTerm}`);
+    const res = await fetch(url + apikey + '&s=' + searchTerm);
     const movieList = await res.json();
 
     let movieIDList = [];
@@ -47,7 +50,7 @@ async function handleSearch(searchTerm) {
 async function handleSearchID(movieIDList) {
     let movieList = [];
     for (const movieID of movieIDList) {
-        const res = await fetch(`http://www.omdbapi.com/?apikey=${apikey}&i=${movieID}`);
+        const res = await fetch(url + apikey + '&i=' + movieID);
         const movie = await res.json();
         movieList.push(movie);
     }
