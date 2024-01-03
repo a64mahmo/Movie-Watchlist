@@ -24,7 +24,7 @@ searchInput.addEventListener("keyup", function (event) {
 // Function to handle search
 async function handleSearch(searchTerm) {
   const res = await fetch(
-    `http://www.omdbapi.com/?apikey=${apikey}&s=${searchTerm}`
+    `https://www.omdbapi.com/?apikey=${apikey}&s=${searchTerm}`
   );
   const movieList = await res.json();
 
