@@ -12,7 +12,9 @@ async function printSavedMovies() {
   const savedMoviesIDs =
     JSON.parse(localStorage.getItem("savedMoviesIDs")) || [];
   for (const id of savedMoviesIDs) {
-    const res = await fetch(`http://www.omdbapi.com/?apikey=${apikey}&i=${id}`);
+    const res = await fetch(
+      `https://www.omdbapi.com/?apikey=${apikey}&i=${id}`
+    );
     const movie = await res.json();
     if (movie.Response !== "False") {
       searchResults.innerHTML += `
