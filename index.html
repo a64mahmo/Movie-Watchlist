@@ -2,29 +2,27 @@
   <head>
     <link rel="stylesheet" href="index.css" />
   </head>
-    <body class="container">
-        <div class="side_bar">
-            <h1>Find your film</h1>
-            <nav class="nav">
-                <h3><a href="watchlist.html">Watchlist</a></h3>
-            </nav>
-        </div>
+  <body class="container">
+    <div class="side_bar">
+      <h1>Find your film</h1>
+      <nav class="nav">
+        <h3 id="watchlist-btn"><a href="watchlist.html">Watchlist</a></h3>
+      </nav>
+    </div>
 
-        <div class="search_bar">
-            <input type="text" placeholder="Search for a movie" id="search-input"/>
-        </div>
+    <div class="search_bar">
+      <input type="text" placeholder="Search for a movie" id="search-input" />
+    </div>
 
-        <section class="result_section" id="search-results">
+    <section class="result_section" id="search-results">
+      <div class="empy_state" id="empy_state">
+        <h1>Search for a movie</h1>
+      </div>
 
-          <div class="empy_state" id="empy_state">
-            <h1>Search for a movie</h1>
-          </div>
-
-          <div id="loading-screen" style="display: none;">
-            <p>Loading...</p>
-          </div>
-
-        </section>
-         <script src="index.js"></script>
-      </body>
+      <div id="loading-screen" style="display: none">
+        <p>Loading...</p>
+      </div>
+    </section>
+    <script src="index.js"></script>
+  </body>
 </html>

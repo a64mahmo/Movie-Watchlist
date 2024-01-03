@@ -1,75 +1,78 @@
-
 // Global variables
-let searchInput = document.getElementById('search-input');
-const searchResults = document.getElementById('search-results');
-let emptySearch = document.getElementById('empy_state');
-const apikey = 'bc20f6e3';
+let searchInput = document.getElementById("search-input");
+const searchResults = document.getElementById("search-results");
+let emptySearch = document.getElementById("empy_state");
+const apikey = "bc20f6e3";
 
 // Event listener for search input
-searchInput.addEventListener('keyup', function (event) {
-    // Number 13 is the "Enter" key on the keyboard
-    if (event.keyCode === 13) {
-        // Cancel the default action, if needed
-        event.preventDefault();
-        // Trigger the button element with a click
-        // Your search logic here
-        const searchTerm = searchInput.value;
-        if (searchTerm) {
-            clearSearchInput();
-            handleSearch(searchTerm);
-            emptySearch.style.display = 'none';
-        }
+searchInput.addEventListener("keyup", function (event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.keyCode === 13) {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    // Your search logic here
+    const searchTerm = searchInput.value;
+    if (searchTerm) {
+      clearSearchInput();
+      handleSearch(searchTerm);
+      emptySearch.style.display = "none";
     }
+  }
 });
 
 // Function to handle search
 async function handleSearch(searchTerm) {
-    const res = await fetch(`http://www.omdbapi.com/?apikey=${apikey}&s=${searchTerm}`);
-    const movieList = await res.json();
+  const res = await fetch(
+    `http://www.omdbapi.com/?apikey=${apikey}&s=${searchTerm}`
+  );
+  const movieList = await res.json();
 
-    let movieIDList = [];
+  let movieIDList = [];
 
-    if (movieList.Response === 'False') {
-        searchResults.innerHTML = '<h1 class="no-results"> No results found </h1>';
-        console.log('No movies found');
-        return;
-    } else {
-        movieList.Search.forEach(movie => {
-            movieIDList.push(movie.imdbID);
-        });
+  if (movieList.Response === "False") {
+    searchResults.innerHTML = '<h1 class="no-results"> No results found </h1>';
+    console.log("No movies found");
+    return;
+  } else {
+    movieList.Search.forEach((movie) => {
+      movieIDList.push(movie.imdbID);
+    });
 
-        handleSearchID(movieIDList);
-        clearSearchResults();
-    }
+    handleSearchID(movieIDList);
+    clearSearchResults();
+  }
 }
 
 // Function to handle search by movie ID
 async function handleSearchID(movieIDList) {
-    let movieList = [];
-    for (const movieID of movieIDList) {
-        const res = await fetch(`http://www.omdbapi.com/?apikey=${apikey}&i=${movieID}`);
-        const movie = await res.json();
-        movieList.push(movie);
-    }
-    printMovies(movieList);
+  let movieList = [];
+  for (const movieID of movieIDList) {
+    const res = await fetch(
+      `http://www.omdbapi.com/?apikey=${apikey}&i=${movieID}`
+    );
+    const movie = await res.json();
+    movieList.push(movie);
+  }
+  printMovies(movieList);
 }
 
 // Function to clear search results
 function clearSearchResults() {
-    searchResults.innerHTML = '';
+  searchResults.innerHTML = "";
 }
 
 // Function to clear search input
 function clearSearchInput() {
-    searchInput.value = '';
+  searchInput.value = "";
 }
 
 // Function to print movies
 
 function printMovies(movies) {
-    if (movies) {
-        movies.forEach(movie => {
-            searchResults.innerHTML += `
+  if (movies) {
+    movies.forEach((movie) => {
+      searchResults.innerHTML += `
             <div class="border-wrap">
             <article class="movie_card ">
               <img
@@ -95,32 +98,26 @@ function printMovies(movies) {
               </div>
             </article>
           </div>`;
-
-
-        });
-    }
+    });
+  }
 }
 
-// Add event listener to add button
 let savedMoviesIDs = [];
-searchResults.addEventListener('click', function(event) {
-
-    if (event.target.className === 'add-btn') {
-        const movieID = event.target.id;
-        if (savedMoviesIDs.includes(movieID)) {
-            return;
-        } else {
-            savedMoviesIDs.push(movieID);
-            localStorage.setItem('savedMoviesIDs', JSON.stringify(savedMoviesIDs));
-            console.log(savedMoviesIDs);
-        }
+searchResults.addEventListener("click", function (event) {
+  if (event.target.className === "add-btn") {
+    const movieID = event.target.id;
+    if (!savedMoviesIDs.includes(movieID)) {
+      savedMoviesIDs.push(movieID);
+      localStorage.setItem("savedMoviesIDs", JSON.stringify(savedMoviesIDs));
     }
+  }
+  console.log(savedMoviesIDs);
 });
 
 // Function to print saved movies
 function printSavedMovies() {
-    const savedMoviesIDs = JSON.parse(localStorage.getItem('savedMoviesIDs'));
-    if (savedMoviesIDs) {
-        handleSearchID(savedMoviesIDs);
-    }
+  const savedMoviesIDs = JSON.parse(localStorage.getItem("savedMoviesIDs"));
+  if (savedMoviesIDs) {
+    handleSearchID(savedMoviesIDs);
+  }
 }
