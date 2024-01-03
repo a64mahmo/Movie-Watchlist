@@ -109,6 +109,11 @@ searchResults.addEventListener("click", function (event) {
     if (!savedMoviesIDs.includes(movieID)) {
       savedMoviesIDs.push(movieID);
       localStorage.setItem("savedMoviesIDs", JSON.stringify(savedMoviesIDs));
+      event.target.textContent = "Added"; // Change button text
+      event.target.disabled = true; // Disable button
+      event.target.style.transform = "scale(1.00)";
+      event.target.style.background = "#7c7c7c";
+      event.target.style.cursor = "not-allowed";
     }
   }
   console.log(savedMoviesIDs);
