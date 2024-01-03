@@ -49,7 +49,7 @@ async function handleSearchID(movieIDList) {
   let movieList = [];
   for (const movieID of movieIDList) {
     const res = await fetch(
-      `http://www.omdbapi.com/?apikey=${apikey}&i=${movieID}`
+      `https://www.omdbapi.com/?apikey=${apikey}&i=${movieID}`
     );
     const movie = await res.json();
     movieList.push(movie);
